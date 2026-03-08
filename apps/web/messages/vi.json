@@ -1,0 +1,211 @@
+{
+  "nav": {
+    "lab": "Lab",
+    "aeroCalc": "Aero Calc",
+    "fitTool": "Fit Tool",
+    "bookSession": "Đặt Lịch"
+  },
+  "hero": {
+    "label": "BK-AERO-LAB / 2024",
+    "location": "TP. HỒ CHÍ MINH, VN",
+    "metricLabel": "TIẾT KIỆM LỰC KÉO TẠI 40KM/H",
+    "line1": "KIẾN TẠO",
+    "line2": "CHO TỪNG",
+    "line3": "TAY ĐUA.",
+    "tagline": "Lab TT & Triathlon chuyên biệt tại Việt Nam. Không đại trà — được tinh chỉnh chính xác theo thể hình của bạn. Từng milimet. Từng watt.",
+    "ctaPrimary": "Đặt Lịch Ngay",
+    "ctaSecondary": "Khám Phá Lab →",
+    "scroll": "CUỘN"
+  },
+  "manifesto": {
+    "label": "TRIẾT LÝ CỦA CHÚNG TÔI",
+    "line1": "CHÚNG TÔI KHÔNG BÁN LINH KIỆN.",
+    "line2": "CHÚNG TÔI KIẾN TẠO",
+    "line3": "PHIÊN BẢN NHANH NHẤT CỦA BẠN.",
+    "body": "Các thương hiệu đại trà xây dựng cho tay đua trung bình. BIGKID xây dựng cho <strong>bạn</strong>. Từ chiều dài thân đến độ linh hoạt, từng mục tiêu đua — mỗi linh kiện chúng tôi đề xuất đều được chấm điểm theo số đo chính xác của bạn.",
+    "pillars": {
+      "precision": {
+        "title": "CHÍNH XÁC",
+        "body": "Sai số vị trí dưới 1mm. Chúng tôi đo reach, stack và drop theo cơ thể bạn — không theo bảng size."
+      },
+      "performance": {
+        "title": "HIỆU SUẤT",
+        "body": "Tuân thủ UCI. Đã kiểm định aero. Mỗi linh kiện trong lab đều được lựa chọn vì tốc độ thực tế, không phải để trưng bày."
+      },
+      "yours": {
+        "title": "CHỈ CỦA BẠN",
+        "body": "Số lượng nhỏ. Thủ công. Không có hai setup nào giống nhau vì không có hai tay đua nào giống nhau — đây không phải hàng đại trà."
+      }
+    }
+  },
+  "numbers": {
+    "label": "NHỮNG CON SỐ CỐT LÕI",
+    "metrics": {
+      "tolerance": {
+        "value": "<1",
+        "unit": "MM",
+        "label": "DUNG SAI VỊ TRÍ",
+        "sub": "Khoảng cách giữa vị trí aero tối ưu và một vị trí lãng phí hoàn toàn."
+      },
+      "watts": {
+        "value": "38",
+        "unit": "W",
+        "label": "TIẾT KIỆM LỰC KÉO TIỀM NĂNG",
+        "sub": "Tại 40km/h. Khoảng cách giữa setup hiện tại và setup được tối ưu hoàn toàn."
+      },
+      "steps": {
+        "value": "3",
+        "unit": "BƯỚC",
+        "label": "TỪ TƯ VẤN ĐẾN TỐC ĐỘ",
+        "sub": "Đo đạc. Khớp linh kiện. Thi đấu. Quy trình BIGKID chỉ mất vài ngày."
+      }
+    }
+  },
+  "process": {
+    "label": "QUY TRÌNH",
+    "line1": "BA BƯỚC",
+    "line2": "ĐỂ NHANH HƠN.",
+    "sub": "Không đoán mò. Không thử-sai. Quy trình BIGKID ánh xạ số đo chính xác của bạn với sản phẩm phù hợp trước khi bất kỳ thứ gì được giao.",
+    "steps": {
+      "geometry": {
+        "badge": "FIT TOOL",
+        "title": "HỒ SƠ SỐ ĐO",
+        "body": "Nhập chiều dài thân, sải tay, chân trong và chỉ số linh hoạt. Chỉ mất 3 phút.",
+        "cta": "Chạy Fit Tool →"
+      },
+      "match": {
+        "badge": "SẢN PHẨM",
+        "title": "KHỚP LINH KIỆN",
+        "body": "Chúng tôi chấm điểm từng sản phẩm trong lab theo hồ sơ của bạn. Nhận danh sách xếp hạng với dữ liệu fit thực tế.",
+        "cta": "Khám Phá Lab →"
+      },
+      "consult": {
+        "badge": "TELEGRAM",
+        "title": "TƯ VẤN TRỰC TIẾP",
+        "body": "Chuyên gia xem xét hồ sơ và phản hồi trực tiếp. Không bot. Không form mẫu. Cuộc trò chuyện thật.",
+        "cta": "Đặt Lịch Ngay →"
+      }
+    }
+  },
+  "finalCta": {
+    "label": "BẮT ĐẦU TỪ ĐÂY",
+    "line1": "SẴN SÀNG",
+    "line2": "TÌM LỢI THẾ",
+    "line3": "CỦA BẠN?",
+    "body": "Bắt đầu bằng số đo của bạn. Chạy fit tool miễn phí hoặc đặt lịch tư vấn trực tiếp với chuyên gia BIGKID — không ràng buộc, không áp lực.",
+    "ctaPrimary": "Đặt Lịch Tư Vấn",
+    "ctaSecondary": "Chạy Fit Tool →",
+    "trust": {
+      "uci": { "label": "TUÂN THỦ UCI", "value": "Toàn bộ linh kiện" },
+      "handbuilt": { "label": "THỦ CÔNG", "value": "TP. Hồ Chí Minh" },
+      "response": { "label": "PHẢN HỒI", "value": "Trong 24 giờ" }
+    }
+  },
+  "products": {
+    "catalogLabel": "DANH MỤC",
+    "all": "Tất Cả",
+    "title": "Sản Phẩm",
+    "empty": "Không tìm thấy sản phẩm.",
+    "poa": "Liên hệ báo giá",
+    "view": "Xem →",
+    "compare": "+ SO SÁNH",
+    "selected": "✓ ĐÃ CHỌN",
+    "preview3d": "XEM 3D",
+    "specsTitle": "Thông Số Kỹ Thuật",
+    "requestConsult": "Tư Vấn Ngay",
+    "checkFit": "Kiểm Tra Fit →",
+    "no3d": "CHƯA CÓ MÔ HÌNH 3D",
+    "backToLab": "← Quay Lại Lab",
+    "comparison": "SO SÁNH",
+    "category": "Danh Mục",
+    "description": "Mô Tả",
+    "consultOnThis": "Tư Vấn Sản Phẩm Này",
+    "viewProduct": "Xem Sản Phẩm →"
+  },
+  "fitting": {
+    "badge": "PHÂN TÍCH FIT / CHÍNH XÁC",
+    "title": "Fit Tool",
+    "description": "Nhập số đo cơ thể và chọn sản phẩm. Hệ thống sẽ chấm điểm mức độ phù hợp và đưa ra điều chỉnh cụ thể — không đoán mò.",
+    "sections": {
+      "riderInfo": "Thông Tin Tay Đua",
+      "geometry": "Số Đo Cơ Thể (mm)",
+      "positionProduct": "Tư Thế & Sản Phẩm"
+    },
+    "fields": {
+      "fullName": "Họ và Tên",
+      "email": "Email (tùy chọn)",
+      "emailPlaceholder": "Để nhận kết quả",
+      "torso": "Chiều Dài Thân",
+      "torsoPlaceholder": "vd. 550",
+      "arm": "Sải Tay",
+      "armPlaceholder": "vd. 580",
+      "inseam": "Chân Trong",
+      "inseamPlaceholder": "vd. 820",
+      "flexibility": "Độ Linh Hoạt / Tư Thế Aero",
+      "product": "Sản Phẩm Cần Phân Tích",
+      "productPlaceholder": "Chọn sản phẩm..."
+    },
+    "flexibility": {
+      "1": "1 — Cứng (thẳng đứng)",
+      "2": "2 — Hơi cứng",
+      "3": "3 — Trung bình",
+      "4": "4 — Linh hoạt",
+      "5": "5 — Rất linh hoạt (aero tích cực)"
+    },
+    "submit": "PHÂN TÍCH FIT →",
+    "submitting": "ĐANG PHÂN TÍCH...",
+    "scoreLabel": "ĐIỂM FIT / 10",
+    "adjustmentsTitle": "Điều Chỉnh Cần Thiết",
+    "discussCta": "Trao Đổi Với Chuyên Gia →"
+  },
+  "consult": {
+    "badge": "TƯ VẤN CHUYÊN SÂU / ĐẶT LỊCH",
+    "title": "Đặt Lịch Tư Vấn",
+    "description": "Chúng tôi không bán hàng sẵn. Chia sẻ mục tiêu của bạn — chuyên gia sẽ phản hồi qua Telegram hoặc email.",
+    "fields": {
+      "fullName": "Họ và Tên *",
+      "email": "Email",
+      "phone": "Điện Thoại / Telegram",
+      "phonePlaceholder": "+84 xxx xxx xxx",
+      "product": "Sản Phẩm Quan Tâm (tùy chọn)",
+      "noProduct": "Chưa xác định",
+      "message": "Mục Tiêu Của Bạn",
+      "messagePlaceholder": "Mục tiêu đua, setup hiện tại, vấn đề gặp phải..."
+    },
+    "submit": "GỬI YÊU CẦU →",
+    "submitting": "ĐANG GỬI...",
+    "successLabel": "ĐÃ NHẬN YÊU CẦU",
+    "successBody": "Chúng tôi sẽ liên hệ sớm. Vui lòng chờ phản hồi trong vòng 24 giờ qua thông tin bạn đã cung cấp."
+  },
+  "aero": {
+    "badge": "CÔNG CỤ / TÍNH TOÁN AERO",
+    "line1": "BẠN ĐANG MẤT",
+    "line2": "BAO NHIÊU WATT?",
+    "description": "Tại 40km/h, lực cản không khí chiếm hơn 80% công suất của bạn. Chọn vị trí hiện tại và mục tiêu để thấy chi phí watt và thời gian thực tế.",
+    "currentPosition": "VỊ TRÍ HIỆN TẠI",
+    "targetPosition": "VỊ TRÍ MỤC TIÊU",
+    "speed": "Tốc Độ Trung Bình",
+    "distance": "Cự Ly Đua",
+    "savingsLabel": "TIẾT KIỆM TIỀM NĂNG",
+    "noGain": "KHÔNG CÓ TIẾT KIỆM — ĐỔI VỊ TRÍ",
+    "wattsSaved": "Công Suất Tiết Kiệm",
+    "timeSaved": "Thời Gian Tiết Kiệm Trên {distance}km",
+    "cdaReduction": "Giảm CdA",
+    "disclaimer": "Ước tính theo mô hình kéo khí động học đơn giản. Kết quả thực tế phụ thuộc vào tư thế, thiết bị và điều kiện.",
+    "unlockCta": "Chinh Phục Lợi Thế →",
+    "cdaSpectrum": "PHỔ CDA (m²) — THẤP HƠN LÀ NHANH HƠN",
+    "positions": {
+      "upright_road": { "label": "Xe Đường — Tư Thế Đứng", "description": "Tư thế đường tiêu chuẩn, tay trên hoods" },
+      "drops_road": { "label": "Xe Đường — Cúi Thấp", "description": "Tay trong drops, lưng phẳng" },
+      "poor_tt": { "label": "TT — Chưa Tối Ưu", "description": "Có tay TT nhưng fit kém, hông mở" },
+      "average_tt": { "label": "TT — Fit Trung Bình", "description": "Tư thế TT ổn, đã có một số lợi ích" },
+      "good_tt": { "label": "TT — Fit Tốt", "description": "Tư thế TT tối ưu, hông khép" },
+      "elite_tt": { "label": "TT — Đỉnh Cao (BIGKID)", "description": "Fit chính xác, tuân thủ UCI, tiết kiệm tối đa" }
+    }
+  },
+  "telegram": {
+    "title": "Chat Với Chuyên Gia",
+    "body": "Không bot. Chuyên gia BIGKID phản hồi trong 24h.",
+    "cta": "Mở Telegram →"
+  }
+}

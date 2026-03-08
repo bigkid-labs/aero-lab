@@ -1,0 +1,211 @@
+{
+  "nav": {
+    "lab": "Lab",
+    "aeroCalc": "Aero Calc",
+    "fitTool": "Fit Tool",
+    "bookSession": "Book a Session"
+  },
+  "hero": {
+    "label": "BK-AERO-LAB / 2024",
+    "location": "HO CHI MINH CITY, VN",
+    "metricLabel": "POTENTIAL AERO GAIN AT 40KM/H",
+    "line1": "BUILT",
+    "line2": "FOR ONE",
+    "line3": "RIDER.",
+    "tagline": "Vietnam's exclusive TT & Triathlon performance lab. Not mass-market — precision-engineered for your exact geometry. Every millimeter. Every watt.",
+    "ctaPrimary": "Book a Session",
+    "ctaSecondary": "Explore the Lab →",
+    "scroll": "SCROLL"
+  },
+  "manifesto": {
+    "label": "OUR POSITION",
+    "line1": "WE DON'T SELL PARTS.",
+    "line2": "WE ENGINEER",
+    "line3": "YOUR FASTEST SELF.",
+    "body": "Mass-market brands build for the average rider. BIGKID builds for <strong>you</strong>. Your torso length, your flexibility, your race goals — every component we recommend is scored against your exact geometry before we ever suggest it.",
+    "pillars": {
+      "precision": {
+        "title": "PRECISION",
+        "body": "Positional tolerance under 1mm. We measure reach, stack, and drop against your body — not a size chart."
+      },
+      "performance": {
+        "title": "PERFORMANCE",
+        "body": "UCI-legal. Aero-verified. Every component in our lab is selected for real-world speed gains, not shelf appeal."
+      },
+      "yours": {
+        "title": "YOURS ALONE",
+        "body": "Small batch. Handbuilt. No two setups are identical because no two riders are. This isn't off-the-shelf."
+      }
+    }
+  },
+  "numbers": {
+    "label": "THE NUMBERS THAT MATTER",
+    "metrics": {
+      "tolerance": {
+        "value": "<1",
+        "unit": "MM",
+        "label": "Positional Tolerance",
+        "sub": "The difference between a perfect aero position and a wasted one."
+      },
+      "watts": {
+        "value": "38",
+        "unit": "W",
+        "label": "Potential Aero Gain",
+        "sub": "At 40km/h. The gap between your current setup and an optimised one."
+      },
+      "steps": {
+        "value": "3",
+        "unit": "STEPS",
+        "label": "From Consult to Speed",
+        "sub": "Geometry. Match. Ride. The BIGKID process takes days, not months."
+      }
+    }
+  },
+  "process": {
+    "label": "HOW IT WORKS",
+    "line1": "THREE STEPS",
+    "line2": "TO FASTER.",
+    "sub": "No guesswork. No trial and error. The BIGKID process maps your exact geometry to the right product before anything ships.",
+    "steps": {
+      "geometry": {
+        "badge": "FIT TOOL",
+        "title": "Geometry Profile",
+        "body": "Submit your torso, arm, inseam measurements and flexibility rating. Takes 3 minutes.",
+        "cta": "Run the Fit Tool →"
+      },
+      "match": {
+        "badge": "PRODUCT",
+        "title": "Lab Match",
+        "body": "We score every product in our lab against your profile. Receive a ranked shortlist with real fit data.",
+        "cta": "Explore the Lab →"
+      },
+      "consult": {
+        "badge": "TELEGRAM",
+        "title": "Direct Consultation",
+        "body": "A specialist reviews your profile and follows up. No bots. No forms. Real conversation.",
+        "cta": "Book a Session →"
+      }
+    }
+  },
+  "finalCta": {
+    "label": "START HERE",
+    "line1": "READY TO",
+    "line2": "FIND YOUR",
+    "line3": "EDGE?",
+    "body": "It starts with your geometry. Run the free fit tool or book a direct session with a BIGKID specialist — no commitment, no sales pressure.",
+    "ctaPrimary": "Book a Session",
+    "ctaSecondary": "Run Fit Tool →",
+    "trust": {
+      "uci": { "label": "UCI LEGAL", "value": "All components" },
+      "handbuilt": { "label": "HANDBUILT", "value": "Ho Chi Minh City" },
+      "response": { "label": "RESPONSE", "value": "< 24 hours" }
+    }
+  },
+  "products": {
+    "catalogLabel": "CATALOG",
+    "all": "All",
+    "title": "Products",
+    "empty": "No products found.",
+    "poa": "POA",
+    "view": "View →",
+    "compare": "+ COMPARE",
+    "selected": "✓ SELECTED",
+    "preview3d": "3D PREVIEW",
+    "specsTitle": "Engineering Specs",
+    "requestConsult": "Request a Consultation",
+    "checkFit": "Check Fit →",
+    "no3d": "NO 3D MODEL",
+    "backToLab": "← Back to Lab",
+    "comparison": "COMPARISON",
+    "category": "Category",
+    "description": "Description",
+    "consultOnThis": "Consult on This",
+    "viewProduct": "View Product →"
+  },
+  "fitting": {
+    "badge": "PRECISION FIT / ANALYSIS ENGINE",
+    "title": "Fit Tool",
+    "description": "Enter your body geometry and select a product. The engine scores compatibility and surfaces actionable adjustments — no guesswork.",
+    "sections": {
+      "riderInfo": "Rider Info",
+      "geometry": "Body Geometry (mm)",
+      "positionProduct": "Position & Product"
+    },
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email (optional)",
+      "emailPlaceholder": "For your results",
+      "torso": "Torso Length",
+      "torsoPlaceholder": "e.g. 550",
+      "arm": "Arm Length",
+      "armPlaceholder": "e.g. 580",
+      "inseam": "Inseam",
+      "inseamPlaceholder": "e.g. 820",
+      "flexibility": "Flexibility / Position Aggression",
+      "product": "Product to Fit Against",
+      "productPlaceholder": "Select a product..."
+    },
+    "flexibility": {
+      "1": "1 — Rigid (upright position)",
+      "2": "2 — Moderately stiff",
+      "3": "3 — Average",
+      "4": "4 — Flexible",
+      "5": "5 — Very flexible (aggressive aero)"
+    },
+    "submit": "RUN FIT ANALYSIS →",
+    "submitting": "ANALYZING...",
+    "scoreLabel": "FIT SCORE / 10",
+    "adjustmentsTitle": "Required Adjustments",
+    "discussCta": "Discuss with a Specialist →"
+  },
+  "consult": {
+    "badge": "CONSULTATIVE SALES / REQUEST",
+    "title": "Request a Consultation",
+    "description": "We don't sell off the shelf. Tell us what you're working towards — a specialist will reach out via Telegram or email.",
+    "fields": {
+      "fullName": "Full Name *",
+      "email": "Email",
+      "phone": "Phone / Telegram",
+      "phonePlaceholder": "+84 xxx xxx xxx",
+      "product": "Product of Interest (optional)",
+      "noProduct": "No specific product",
+      "message": "Tell us about your goals",
+      "messagePlaceholder": "Your race goals, current setup, pain points..."
+    },
+    "submit": "SEND REQUEST →",
+    "submitting": "SENDING...",
+    "successLabel": "REQUEST RECEIVED",
+    "successBody": "We'll be in touch. Expect a response within 24 hours via the contact you provided."
+  },
+  "aero": {
+    "badge": "TOOL / AERO CALCULATOR",
+    "line1": "HOW MANY WATTS",
+    "line2": "ARE YOU LOSING?",
+    "description": "At 40km/h, aerodynamic drag accounts for over 80% of your power output. Select your current position and your target — see the real watt and time cost.",
+    "currentPosition": "CURRENT POSITION",
+    "targetPosition": "TARGET POSITION",
+    "speed": "Average Speed",
+    "distance": "Race Distance",
+    "savingsLabel": "POTENTIAL SAVINGS",
+    "noGain": "NO GAIN — SWAP POSITIONS",
+    "wattsSaved": "Aero Power Savings",
+    "timeSaved": "Time Saved over {distance}km",
+    "cdaReduction": "CdA Reduction",
+    "disclaimer": "Estimates based on simplified aerodynamic drag model. Real gains depend on rider position, equipment, and conditions.",
+    "unlockCta": "Unlock These Gains →",
+    "cdaSpectrum": "CDA SPECTRUM (m²) — LOWER IS FASTER",
+    "positions": {
+      "upright_road": { "label": "Upright Road Bike", "description": "Standard road position, hands on hoods" },
+      "drops_road": { "label": "Road Drops", "description": "Hands in drops, back flat" },
+      "poor_tt": { "label": "TT — Unoptimised", "description": "TT bars but poor fit, hips open" },
+      "average_tt": { "label": "TT — Average Fit", "description": "Reasonable TT position, some gains" },
+      "good_tt": { "label": "TT — Good Fit", "description": "Optimised TT position, closed hips" },
+      "elite_tt": { "label": "TT — Elite (BIGKID)", "description": "Precision-fitted, UCI legal, maximum savings" }
+    }
+  },
+  "telegram": {
+    "title": "Talk to a specialist",
+    "body": "No bots. A real BIGKID fitter responds within 24h.",
+    "cta": "Open Telegram →"
+  }
+}

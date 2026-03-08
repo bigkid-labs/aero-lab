@@ -1,0 +1,179 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+
+export function Nav() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // pathname includes the locale prefix, e.g. /en or /vi
+  const localePrefix = `/${locale}`;
+  const isHome = pathname === localePrefix || pathname === `${localePrefix}/`;
+  const transparent = isHome && !scrolled;
+
+  type NavLink = { href: string; label: string; cta?: boolean };
+  const NAV_LINKS: NavLink[] = [
+    { href: "/products", label: t("lab") },
+    { href: "/aero", label: t("aeroCalc") },
+    { href: "/fitting", label: t("fitTool") },
+    { href: "/consult", label: t("bookSession"), cta: true },
+  ];
+
+  return (
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        borderBottom: transparent ? "1px solid transparent" : "1px solid var(--aero-border)",
+        backgroundColor: transparent ? "transparent" : "rgba(5,8,15,0.92)",
+        backdropFilter: transparent ? "none" : "blur(16px)",
+        WebkitBackdropFilter: transparent ? "none" : "blur(16px)",
+        transition: "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
+      }}
+    >
+      <nav
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "0 2.5rem",
+          height: "72px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Wordmark */}
+        <Link
+          href="/"
+          style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}
+        >
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              backgroundColor: "var(--aero-accent)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "0.95rem",
+                fontWeight: 900,
+                color: "#fff",
+                letterSpacing: "-0.02em",
+                lineHeight: 1,
+              }}
+            >
+              BK
+            </span>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
+            <span
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "1.15rem",
+                fontWeight: 800,
+                letterSpacing: "0.08em",
+                color: "var(--aero-white)",
+                lineHeight: 1,
+              }}
+            >
+              BIGKID
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: "0.45rem",
+                fontWeight: 500,
+                letterSpacing: "0.28em",
+                color: "var(--aero-accent)",
+                lineHeight: 1,
+              }}
+            >
+              AERO LAB / VN
+            </span>
+          </div>
+        </Link>
+
+        {/* Links + Language Switcher */}
+        <ul
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "2.5rem",
+            listStyle: "none",
+          }}
+        >
+          {NAV_LINKS.map(({ href, label, cta }) => (
+            <li key={href}>
+              {cta ? (
+                <Link
+                  href={href}
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    padding: "0.55rem 1.25rem",
+                    backgroundColor: "var(--aero-accent)",
+                    color: "#fff",
+                    fontWeight: 700,
+                    textDecoration: "none",
+                    transition: "opacity 0.15s",
+                    display: "inline-block",
+                  }}
+                >
+                  {label}
+                </Link>
+              ) : (
+                <Link
+                  href={href}
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.72rem",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    color: pathname.includes(href)
+                      ? "var(--aero-white)"
+                      : "var(--aero-grey)",
+                    borderBottom: pathname.includes(href)
+                      ? "1px solid var(--aero-accent)"
+                      : "1px solid transparent",
+                    paddingBottom: "3px",
+                    transition: "color 0.15s, border-color 0.15s",
+                  }}
+                >
+                  {label}
+                </Link>
+              )}
+            </li>
+          ))}
+          <li>
+            <LanguageSwitcher />
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+}

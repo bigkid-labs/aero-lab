@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ─── BIGKID AERO LAB — Design System v2 ────────────────────────────────────── */
+:root {
+  /* Depth palette — navy-black, not flat black */
+  --aero-black:      #05080f;
+  --aero-surface:    #0b1020;
+  --aero-surface-2:  #101828;
+  --aero-border:     #1c2a3f;
+  --aero-muted:      #1e2d45;
+
+  /* Accent — performance orange */
+  --aero-accent:     #ff4500;
+  --aero-accent-dim: #6b1d00;
+  --aero-accent-glow:rgba(255, 69, 0, 0.12);
+
+  /* Typography scale */
+  --aero-white:      #f5f5f5;
+  --aero-off-white:  #c8d0dc;
+  --aero-grey:       #7a8fa8;
+  --aero-grey-dim:   #354560;
+
+  /* Semantic */
+  --background: var(--aero-black);
+  --foreground: var(--aero-white);
+  --surface:    var(--aero-surface);
+  --border:     var(--aero-border);
+  --accent:     var(--aero-accent);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface:    var(--surface);
+  --color-border:     var(--border);
+  --color-accent:     var(--accent);
+}
+
+/* ─── Base reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ─── Typography helpers ─────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display, var(--font-sans));
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  /* No text-transform: translated content is already cased in messages/ */
+  color: var(--aero-grey);
+}
+
+/* ─── Keyframe animations ────────────────────────────────────────────────────── */
+
+/* Speed line sweeping across the hero */
+@keyframes speedLine {
+  0%   { transform: translateX(-110%); opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateX(110vw); opacity: 0; }
+}
+
+/* Fade + rise for scroll reveals */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Horizontal scan line for hero accent */
+@keyframes scan {
+  0%   { transform: scaleX(0); transform-origin: left; }
+  50%  { transform: scaleX(1); transform-origin: left; }
+  50.01% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* Subtle pulse for accent elements */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Number count-up via CSS custom property */
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+/* ─── Utility classes ────────────────────────────────────────────────────────── */
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: var(--aero-surface); }
+::-webkit-scrollbar-thumb { background: var(--aero-accent); }
