@@ -141,21 +141,41 @@
       "armPlaceholder": "e.g. 580",
       "inseam": "Inseam",
       "inseamPlaceholder": "e.g. 820",
-      "flexibility": "Flexibility / Position Aggression",
+      "flexibility": "Flexibility",
+      "aggressionLevel": "Position Aggression",
       "product": "Product to Fit Against",
       "productPlaceholder": "Select a product..."
     },
     "flexibility": {
-      "1": "1 — Rigid (upright position)",
-      "2": "2 — Moderately stiff",
+      "1": "1 — Rigid, very limited range of motion",
+      "2": "2 — Stiff, some restriction",
       "3": "3 — Average",
       "4": "4 — Flexible",
-      "5": "5 — Very flexible (aggressive aero)"
+      "5": "5 — Very flexible"
+    },
+    "aggression": {
+      "1": "1 — Comfort / endurance position",
+      "2": "2 — Slightly forward",
+      "3": "3 — Race — balanced aero/comfort",
+      "4": "4 — Aggressive aero tuck",
+      "5": "5 — Maximum — UCI-limit aero"
+    },
+    "tooltips": {
+      "torso": "Measured nape-of-neck to top of pelvis (sitting upright). Determines ideal stack height — the vertical distance from BB to your hands.",
+      "arm": "Full arm length shoulder to wrist (arm straight). Drives reach calculation — the horizontal distance from BB to your hands. A 10mm error here shifts ideal reach by 9mm.",
+      "inseam": "Inner leg length floor to crotch. Sets saddle height and influences pad drop — the height differential between saddle and pads.",
+      "flexibility": "How freely you can rotate at the hip and hold an aero position. Restricted riders (1–2) receive a safety offset — ideal reach is reduced to prevent injury.",
+      "aggression": "Your target position intensity. A score of 5 targets maximum UCI-legal aero — lower scores dial in more comfort at the cost of some drag reduction.",
+      "fitScore": "A weighted score across Reach, Stack, and Drop compatibility. 8+ = race-ready. Below 6 = significant adjustments needed before ordering."
     },
     "submit": "RUN FIT ANALYSIS →",
     "submitting": "ANALYZING...",
     "scoreLabel": "FIT SCORE / 10",
     "adjustmentsTitle": "Required Adjustments",
+    "riskLabel": "RISK ASSESSMENT",
+    "riskLow": "LOW — Safe to proceed",
+    "riskModerate": "MODERATE — Adjustments recommended",
+    "riskHigh": "HIGH RISK — Specialist required",
     "discussCta": "Discuss with a Specialist →"
   },
   "consult": {
@@ -191,7 +211,18 @@
     "wattsSaved": "Aero Power Savings",
     "timeSaved": "Time Saved over {distance}km",
     "cdaReduction": "CdA Reduction",
-    "disclaimer": "Estimates based on simplified aerodynamic drag model. Real gains depend on rider position, equipment, and conditions.",
+    "disclaimer": "Tropical mode uses ρ = 1.18 kg/m³ (warm, humid, sea level). Standard uses ISA 1.225 kg/m³. Yaw penalty adds +5% for real-world crosswind. Actual gains depend on rider position, equipment, and course.",
+    "densityToggle": "AIR DENSITY",
+    "densityStandard": "STANDARD (ISA)",
+    "densityTropical": "TROPICAL",
+    "yawToggle": "CROSSWIND YAW +5%",
+    "tooltips": {
+      "cda": "CdA = Drag Coefficient × Frontal Area. Reducing CdA by 0.01 m² saves roughly 5W at 40 km/h — the margin between podium finishes.",
+      "density": "Air density drops in heat and humidity — tropical air is ~4% less dense than ISA standard. Less dense air means less drag at identical speed.",
+      "yaw": "At race pace, crosswinds create a 5–15° yaw angle that increases effective drag. Enabling this adds a realistic +5% penalty — making your savings estimate conservative.",
+      "wattsSaved": "Watts freed from aerodynamic drag at your selected speed. At identical power output, this translates directly to higher speed.",
+      "timeSaved": "Time advantage over the selected distance assuming identical power output. Every second counts on the clock."
+    },
     "unlockCta": "Unlock These Gains →",
     "cdaSpectrum": "CDA SPECTRUM (m²) — LOWER IS FASTER",
     "positions": {

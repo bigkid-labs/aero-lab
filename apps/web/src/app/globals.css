@@ -114,6 +114,16 @@ body {
   50%       { opacity: 0; }
 }
 
+/* High-risk CTA pulse ring — orange glow expanding outward */
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0); }
+}
+.high-risk-pulse {
+  animation: pulseRing 1.6s ease-out infinite;
+}
+
 /* Number count-up via CSS custom property */
 @property --num {
   syntax: "<integer>";

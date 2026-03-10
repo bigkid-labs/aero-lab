@@ -65,13 +65,14 @@ export const ProductDetailSchema = ProductSchema.extend({
 });
 
 export const FitRequestSchema = z.object({
-  full_name: z.string(),
-  email: z.string().optional(),
-  torso_mm: z.number(),
-  arm_mm: z.number(),
-  inseam_mm: z.number(),
-  flexibility: z.number().int().min(1).max(5),
-  product_slug: z.string(),
+  full_name:        z.string(),
+  email:            z.string().optional(),
+  torso_mm:         z.number().positive(),
+  arm_mm:           z.number().positive(),
+  inseam_mm:        z.number().positive(),
+  flexibility:      z.number().int().min(1).max(5),
+  aggression_level: z.number().int().min(1).max(5),
+  product_slug:     z.string(),
 });
 
 export const FitAdjustmentSchema = z.object({
@@ -83,10 +84,12 @@ export const FitAdjustmentSchema = z.object({
 });
 
 export const FitAnalysisSchema = z.object({
-  fit_score: z.number(),
-  verdict: z.string(),
-  recommendation: z.string(),
-  adjustments: z.array(FitAdjustmentSchema),
+  fit_score:       z.number(),
+  verdict:         z.string(),
+  recommendation:  z.string(),
+  adjustments:     z.array(FitAdjustmentSchema),
+  risk_assessment: z.enum(["Low", "Moderate", "High"]),
+  specialist_cta:  z.boolean(),
 });
 
 export const ConsultationRequestSchema = z.object({

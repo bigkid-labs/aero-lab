@@ -51,6 +51,7 @@ async function Hero() {
           flexDirection: "column",
           gap: "4px",
           animation: "fadeIn 1s 0.3s ease-out both",
+          zIndex: 1,
         }}
       >
         <span className="mono-label" style={{ color: "var(--aero-accent)", letterSpacing: "0.2em" }}>
@@ -71,6 +72,7 @@ async function Hero() {
           alignItems: "flex-end",
           gap: "6px",
           animation: "fadeIn 1s 0.5s ease-out both",
+          zIndex: 1,
         }}
       >
         <div
