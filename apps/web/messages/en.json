@@ -3,7 +3,13 @@
     "lab": "Lab",
     "aeroCalc": "Aero Calc",
     "fitTool": "Fit Tool",
-    "bookSession": "Book a Session"
+    "bookSession": "Book a Session",
+    "tools": "Tools",
+    "racePlanner": "Race Planner",
+    "powerZones": "Power Zones",
+    "racePace": "Race Pace",
+    "wind": "Wind Impact",
+    "nutrition": "Nutrition"
   },
   "hero": {
     "label": "BK-AERO-LAB / 2024",
@@ -238,5 +244,100 @@
     "title": "Talk to a specialist",
     "body": "No bots. A real BIGKID fitter responds within 24h.",
     "cta": "Open Telegram →"
+  },
+  "dashboard": {
+    "badge": "RIDER PROFILE",
+    "title": "Command Center",
+    "freeTier": "FREE",
+    "fitCard": "Fit Score",
+    "cdaCard": "CdA",
+    "actionCard": "Next Action",
+    "noFit": "No fit session yet",
+    "noCda": "No aero session yet",
+    "defaultAction": "Run the Aero Calculator to find your next watt saving.",
+    "activity": "Recent Activity",
+    "noActivity": "No saved sessions yet. Run a tool and save your results.",
+    "viewSession": "View",
+    "sessionTypes": {
+      "fit": "Fit Analysis",
+      "aero": "Aero Calculation",
+      "race_plan": "Race Plan",
+      "comparison": "Position Comparison"
+    }
+  },
+  "racePlanner": {
+    "badge": "RACE PREPARATION",
+    "title": "Race Planner",
+    "description": "Enter your target event and we'll build a full preparation report.",
+    "eventName": "Event Name",
+    "eventNamePlaceholder": "e.g. IRONMAN 70.3 Vietnam",
+    "distance": "Bike Distance",
+    "goalTime": "Goal Bike Time (HH:MM)",
+    "terrain": "Terrain",
+    "terrainFlat": "Flat",
+    "terrainRolling": "Rolling",
+    "terrainHilly": "Hilly",
+    "conditions": "Conditions",
+    "bodyWeight": "Body Weight (kg)",
+    "currentCda": "Current CdA (m²)",
+    "submit": "Generate Report",
+    "targetCda": "Target CdA",
+    "powerTarget": "Required Power",
+    "cdaGap": "CdA Gap to Close",
+    "gearChecklist": "Gear Priority Checklist",
+    "fitTimeline": "Fit Timeline",
+    "saveReport": "Save to Profile",
+    "shareReport": "Share",
+    "gear": {
+      "position": "Position optimisation (free)",
+      "helmet": "Aero helmet",
+      "skinsuit": "Skin suit",
+      "wheels": "Deep-section wheels",
+      "bars": "Aero bars"
+    },
+    "timeline": {
+      "12w": "12 weeks — Baseline fit session",
+      "8w": "8 weeks — Aero position lock-in",
+      "4w": "4 weeks — Race simulation ride",
+      "2w": "2 weeks — No new equipment",
+      "race": "Race week — No position changes"
+    }
+  },
+  "login": {
+    "title": "Sign In",
+    "badge": "RIDER ACCESS",
+    "subtitle": "Access your profile, saved sessions, and race plans.",
+    "google": "Continue with Google",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "submit": "Sign In",
+    "noAccount": "No account?",
+    "signUp": "Create one",
+    "orDivider": "OR",
+    "phone": "Continue with Phone",
+    "error": "Sign in failed. Check your credentials."
+  },
+  "tools": {
+    "title": "Engineering Tools",
+    "aeroCalc": { "title": "Aero Calculator", "sub": "Compute watts saved and time gained across rider positions." },
+    "racePlanner": { "title": "Race Planner", "sub": "Build a full race preparation report for your target event." },
+    "powerZones": { "title": "Power Zones", "sub": "7 Coggan zones from your FTP — with watt ranges." },
+    "racePace": { "title": "Race Pace", "sub": "Required speed, power estimate, and pacing recommendation." },
+    "wind": { "title": "Wind Impact", "sub": "Effective CdA under yaw, headwind power cost, time delta." },
+    "nutrition": { "title": "Nutrition", "sub": "Hourly carb, sodium, and fluid targets for race day." }
+  },
+  "compare": {
+    "badge": "POSITION ANALYSIS",
+    "title": "Position Comparison",
+    "addConfig": "Add Configuration",
+    "configLabel": "Config",
+    "speed": "Speed (km/h)",
+    "distance": "Distance (km)",
+    "results": "Comparison Results",
+    "cdaLabel": "CdA",
+    "powerLabel": "Power at Speed",
+    "timeSavedLabel": "Time vs. Config 1",
+    "copyToPlanner": "Copy Best to Race Planner"
   }
 }

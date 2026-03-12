@@ -11,6 +11,7 @@ export function Nav() {
   const locale = useLocale();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -23,12 +24,20 @@ export function Nav() {
   const isHome = pathname === localePrefix || pathname === `${localePrefix}/`;
   const transparent = isHome && !scrolled;
 
+  const TOOL_LINKS = [
+    { href: "/aero",              label: t("aeroCalc") },
+    { href: "/race-planner",      label: t("racePlanner") },
+    { href: "/tools/power-zones", label: t("powerZones") },
+    { href: "/tools/race-pace",   label: t("racePace") },
+    { href: "/tools/wind",        label: t("wind") },
+    { href: "/tools/nutrition",   label: t("nutrition") },
+  ];
+
   type NavLink = { href: string; label: string; cta?: boolean };
   const NAV_LINKS: NavLink[] = [
     { href: "/products", label: t("lab") },
-    { href: "/aero", label: t("aeroCalc") },
-    { href: "/fitting", label: t("fitTool") },
-    { href: "/consult", label: t("bookSession"), cta: true },
+    { href: "/fitting",  label: t("fitTool") },
+    { href: "/consult",  label: t("bookSession"), cta: true },
   ];
 
   return (
@@ -124,6 +133,29 @@ export function Nav() {
             listStyle: "none",
           }}
         >
+          {/* Tools dropdown */}
+          <li style={{ position: "relative", listStyle: "none" }}
+              onMouseEnter={() => setToolsOpen(true)}
+              onMouseLeave={() => setToolsOpen(false)}>
+            <button style={{ background: "none", border: "none", cursor: "pointer",
+              fontFamily: "var(--font-mono)", fontSize: "0.72rem", letterSpacing: "0.12em",
+              textTransform: "uppercase", color: "var(--aero-grey)", padding: 0 }}>
+              {t("tools")} ▾
+            </button>
+            {toolsOpen && (
+              <div style={{ position: "absolute", top: "100%", left: 0, minWidth: "200px", zIndex: 200,
+                backgroundColor: "rgba(5,8,15,0.96)", border: "1px solid var(--aero-border)",
+                backdropFilter: "blur(12px)", display: "flex", flexDirection: "column" }}>
+                {TOOL_LINKS.map(({ href, label }) => (
+                  <Link key={href} href={href} style={{ fontFamily: "var(--font-mono)", fontSize: "0.65rem",
+                    letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.75rem 1.25rem",
+                    color: "var(--aero-grey)", textDecoration: "none", borderBottom: "1px solid var(--aero-border)" }}>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </li>
           {NAV_LINKS.map(({ href, label, cta }) => (
             <li key={href}>
               {cta ? (

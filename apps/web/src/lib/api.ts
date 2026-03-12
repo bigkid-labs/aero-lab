@@ -33,6 +33,20 @@ async function apiFetch<T>(
   return schema.parse(json); // Runtime validation via zod
 }
 
+// ─── Auth helper ──────────────────────────────────────────────────────────────
+
+async function apiFetchAuth<T>(
+  path: string,
+  schema: z.ZodType<T>,
+  token: string,
+  init?: RequestInit,
+): Promise<T> {
+  return apiFetch(path, schema, {
+    ...init,
+    headers: { Authorization: `Bearer ${token}`, ...init?.headers },
+  });
+}
+
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
 export const HealthSchema = z.object({
@@ -114,6 +128,17 @@ export type FitAdjustment = z.infer<typeof FitAdjustmentSchema>;
 export type FitAnalysis = z.infer<typeof FitAnalysisSchema>;
 export type ConsultationRequest = z.infer<typeof ConsultationRequestSchema>;
 
+// ─── Sessions ─────────────────────────────────────────────────────────────────
+
+export const RiderSessionSchema = z.object({
+  id:           z.string().uuid(),
+  rider_id:     z.string().uuid(),
+  session_type: z.enum(["fit", "aero", "race_plan", "comparison"]),
+  payload:      z.record(z.string(), z.unknown()),
+  created_at:   z.string(),
+});
+export type RiderSession = z.infer<typeof RiderSessionSchema>;
+
 // ─── API Client ───────────────────────────────────────────────────────────────
 
 export const api = {
@@ -146,6 +171,23 @@ export const api = {
         method: "POST",
         body: JSON.stringify(body),
       }),
+  },
+
+  sessions: {
+    create: (token: string, body: { session_type: string; payload: Record<string, unknown> }) =>
+      apiFetchAuth("/api/v1/sessions", z.object({ id: z.string() }), token, {
+        method: "POST",
+        body: JSON.stringify(body),
+      }),
+    list: (token: string, params?: { limit?: number; offset?: number }) => {
+      const q = new URLSearchParams({
+        limit: String(params?.limit ?? 10),
+        offset: String(params?.offset ?? 0),
+      });
+      return apiFetchAuth(`/api/v1/sessions?${q}`, z.array(RiderSessionSchema), token);
+    },
+    get: (id: string) =>
+      apiFetch(`/api/v1/sessions/${id}`, RiderSessionSchema),
   },
 } as const;
 

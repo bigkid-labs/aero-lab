@@ -16,6 +16,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500", "700"],
   subsets: ["latin", "vietnamese"],
   display: "swap",
+  preload: false,
 });
 
 // Barlow Condensed with latin-ext covers Vietnamese diacritics in headlines

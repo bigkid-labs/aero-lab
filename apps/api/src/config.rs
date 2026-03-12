@@ -12,6 +12,8 @@ pub struct Config {
     pub telegram_bot_token: String,
     /// Telegram chat ID where consultation alerts are sent (group or user)
     pub telegram_chat_id: i64,
+    /// Supabase JWT secret used to verify bearer tokens from the frontend
+    pub supabase_jwt_secret: String,
 }
 
 #[derive(Debug, Error)]
@@ -34,6 +36,7 @@ impl Config {
                 .map_err(|_| ConfigError::Missing("TELEGRAM_CHAT_ID".into()))?
                 .parse::<i64>()
                 .map_err(|_| ConfigError::Missing("TELEGRAM_CHAT_ID (must be integer)".into()))?,
+            supabase_jwt_secret: require("SUPABASE_JWT_SECRET")?,
         })
     }
 }

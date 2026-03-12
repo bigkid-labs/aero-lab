@@ -22,6 +22,7 @@ sqlx            = { version = "0.8", features = ["postgres", "runtime-tokio", "u
 # ─── Error handling ───────────────────────────────────────────────────────────
 thiserror       = "2"
 anyhow          = "1"
+jsonwebtoken    = "9"
 
 # ─── Types ────────────────────────────────────────────────────────────────────
 uuid            = { version = "1", features = ["v7", "serde"] }

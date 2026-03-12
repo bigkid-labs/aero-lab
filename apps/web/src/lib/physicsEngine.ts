@@ -73,6 +73,79 @@ export function calcTimeSavingsSec(
   return currentTimeSec - newTimeSec;
 }
 
+// ─── Race Planner ─────────────────────────────────────────────────────────────
+
+export type Terrain = "flat" | "rolling" | "hilly";
+export type RaceDistance = "sprint" | "olympic" | "70.3" | "full" | "custom";
+
+/** km for each standard triathlon distance (bike leg only) */
+export const RACE_DISTANCES: Record<Exclude<RaceDistance, "custom">, number> = {
+  sprint:  20,
+  olympic: 40,
+  "70.3":  90,
+  full:    180,
+};
+
+/** Effective rolling resistance penalty by terrain (added to aero power) */
+const TERRAIN_FACTOR: Record<Terrain, number> = {
+  flat:    1.00,
+  rolling: 1.06,
+  hilly:   1.14,
+};
+
+export interface RacePlanParams {
+  distanceKm:   number;
+  goalTimeSec:  number;
+  currentCda:   number;
+  densityMode:  AirDensityMode;
+  terrain:      Terrain;
+  bodyWeightKg: number;
+}
+
+export interface RacePlanResult {
+  requiredAvgSpeedKph: number;
+  requiredPowerW:      number;
+  targetCda:           number;
+  cdaGapM2:            number;
+  achievable:          boolean;
+}
+
+/**
+ * Given a goal time and distance, compute the CdA required.
+ * Solves P = 0.5 × ρ × CdA × v³ × terrain_factor for CdA,
+ * where v is the speed required to cover distanceKm in goalTimeSec.
+ */
+export function computeRacePlan(params: RacePlanParams): RacePlanResult {
+  const { distanceKm, goalTimeSec, currentCda, densityMode, terrain, bodyWeightKg } = params;
+  const density = getAirDensity(densityMode);
+  const tf = TERRAIN_FACTOR[terrain];
+
+  const requiredAvgSpeedKph = (distanceKm / goalTimeSec) * 3600;
+  const speedMs = requiredAvgSpeedKph / 3.6;
+
+  // Total power required = aero drag + rolling resistance proxy
+  // Rolling resistance proxy: Crr × mass × g × v  (Crr ≈ 0.004 for race tires)
+  const CRR = 0.004;
+  const rollingW = CRR * bodyWeightKg * 9.81 * speedMs;
+  const requiredPowerW = (0.5 * density * currentCda * Math.pow(speedMs, 3) * tf) + rollingW;
+
+  // Solve for target CdA that brings aero power to achievable level
+  // Assume rider can sustain requiredPowerW; find CdA = 2(P - Proll) / (ρ × v³ × tf)
+  const aeroPowerBudget = requiredPowerW - rollingW;
+  const targetCda = Math.max(
+    0.12,
+    (2 * aeroPowerBudget) / (density * Math.pow(speedMs, 3) * tf),
+  );
+
+  return {
+    requiredAvgSpeedKph,
+    requiredPowerW,
+    targetCda,
+    cdaGapM2: currentCda - targetCda,
+    achievable: targetCda >= 0.12,
+  };
+}
+
 // ─── Typed Interfaces ─────────────────────────────────────────────────────────
 
 export interface AeroParams {
@@ -110,5 +183,114 @@ export function computeAeroResult(params: AeroParams): AeroResult {
     powerCurrent,
     powerTarget,
     density,
+  };
+}
+
+// ─── Power Zones ──────────────────────────────────────────────────────────────
+
+export interface PowerZone {
+  zone:  number;
+  name:  string;
+  range: [number, number]; // [min, max] watts
+}
+
+export function computePowerZones(ftpW: number): PowerZone[] {
+  const z = (lo: number, hi: number) =>
+    [Math.round(ftpW * lo), Math.round(ftpW * hi)] as [number, number];
+  return [
+    { zone: 1, name: "Active Recovery", range: z(0,    0.55) },
+    { zone: 2, name: "Endurance",       range: z(0.55, 0.75) },
+    { zone: 3, name: "Tempo",           range: z(0.75, 0.90) },
+    { zone: 4, name: "Lactate Thresh.", range: z(0.90, 1.05) },
+    { zone: 5, name: "VO2 Max",         range: z(1.05, 1.20) },
+    { zone: 6, name: "Anaerobic",       range: z(1.20, 1.50) },
+    { zone: 7, name: "Neuromuscular",   range: z(1.50, 99.0) },
+  ];
+}
+
+// ─── Race Pace ────────────────────────────────────────────────────────────────
+
+export interface RacePaceResult {
+  requiredSpeedKph:  number;
+  estimatedPowerW:   number;
+  negativeSplitKph:  number; // first half ~2% slower
+}
+
+export function computeRacePace(
+  goalTimeSec: number,
+  distanceKm:  number,
+  cda:         number,
+  densityMode: AirDensityMode,
+  bodyWeightKg: number,
+): RacePaceResult {
+  const requiredSpeedKph = (distanceKm / goalTimeSec) * 3600;
+  const density = getAirDensity(densityMode);
+  const estimatedPowerW = calcAeroPower(cda, requiredSpeedKph, density, false)
+    + 0.004 * bodyWeightKg * 9.81 * (requiredSpeedKph / 3.6);
+  return {
+    requiredSpeedKph,
+    estimatedPowerW,
+    negativeSplitKph: requiredSpeedKph * 0.98,
+  };
+}
+
+// ─── Wind Impact ──────────────────────────────────────────────────────────────
+
+export interface WindResult {
+  effectiveCda:       number;
+  headwindPowerCostW: number;
+  timeDeltaSec:       number;
+}
+
+export function computeWindImpact(
+  baseCda:        number,
+  _windSpeedKph:  number,
+  yawAngleDeg:    number,
+  riderSpeedKph:  number,
+  distanceKm:     number,
+  densityMode:    AirDensityMode,
+): WindResult {
+  // Simplified yaw model: effective CdA increases with yaw
+  const yawFactor = 1 + (yawAngleDeg / 90) * 0.15;
+  const effectiveCda = baseCda * yawFactor;
+
+  const density = getAirDensity(densityMode);
+  const basePower = calcAeroPower(baseCda, riderSpeedKph, density, false);
+  const windPower = calcAeroPower(effectiveCda, riderSpeedKph, density, false);
+  const headwindPowerCostW = windPower - basePower;
+
+  const timeDeltaSec = calcTimeSavingsSec(
+    effectiveCda, baseCda, riderSpeedKph, distanceKm, density, false,
+  );
+
+  return { effectiveCda, headwindPowerCostW, timeDeltaSec };
+}
+
+// ─── Nutrition ────────────────────────────────────────────────────────────────
+
+export interface NutritionResult {
+  carbsPerHour:  number;
+  sodiumPerHour: number; // mg
+  fluidPerHour:  number; // ml
+  totalCarbsG:   number;
+  totalFluidMl:  number;
+}
+
+export function computeNutrition(
+  bodyWeightKg:  number,
+  durationHours: number,
+  intensityZone: 2 | 3 | 4, // endurance / tempo / threshold
+): NutritionResult {
+  const carbsByZone: Record<number, number> = { 2: 60, 3: 75, 4: 90 };
+  const carbsPerHour = carbsByZone[intensityZone];
+  const sodiumPerHour = Math.round(500 + bodyWeightKg * 5);
+  const fluidPerHour  = Math.round(500 + bodyWeightKg * 5);
+
+  return {
+    carbsPerHour,
+    sodiumPerHour,
+    fluidPerHour,
+    totalCarbsG:  Math.round(carbsPerHour * durationHours),
+    totalFluidMl: Math.round(fluidPerHour  * durationHours),
   };
 }

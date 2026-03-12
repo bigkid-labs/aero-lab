@@ -3,7 +3,13 @@
     "lab": "Lab",
     "aeroCalc": "Aero Calc",
     "fitTool": "Fit Tool",
-    "bookSession": "Đặt Lịch"
+    "bookSession": "Đặt Lịch",
+    "tools": "Công Cụ",
+    "racePlanner": "Kế Hoạch Đua",
+    "powerZones": "Vùng Công Suất",
+    "racePace": "Tốc Độ Đua",
+    "wind": "Tác Động Gió",
+    "nutrition": "Dinh Dưỡng"
   },
   "hero": {
     "label": "BK-AERO-LAB / 2024",
@@ -238,5 +244,100 @@
     "title": "Nói Chuyện Thật Với Chuyên Gia",
     "body": "Không bot, không kịch bản. Người của BIGKID — hiểu đường đua Việt Nam — phản hồi trong 24h.",
     "cta": "Nhắn Qua Telegram →"
+  },
+  "dashboard": {
+    "badge": "HỒ SƠ VẬN ĐỘNG VIÊN",
+    "title": "Trung Tâm Điều Khiển",
+    "freeTier": "MIỄN PHÍ",
+    "fitCard": "Điểm Fit",
+    "cdaCard": "CdA",
+    "actionCard": "Hành Động Tiếp Theo",
+    "noFit": "Chưa có phiên fit",
+    "noCda": "Chưa có phiên aero",
+    "defaultAction": "Chạy Máy Tính Aero để tìm watt tiết kiệm tiếp theo.",
+    "activity": "Hoạt Động Gần Đây",
+    "noActivity": "Chưa có phiên lưu. Chạy công cụ và lưu kết quả.",
+    "viewSession": "Xem",
+    "sessionTypes": {
+      "fit": "Phân Tích Fit",
+      "aero": "Tính Toán Aero",
+      "race_plan": "Kế Hoạch Đua",
+      "comparison": "So Sánh Tư Thế"
+    }
+  },
+  "racePlanner": {
+    "badge": "CHUẨN BỊ ĐUA",
+    "title": "Kế Hoạch Đua",
+    "description": "Nhập sự kiện mục tiêu và chúng tôi sẽ tạo báo cáo chuẩn bị đầy đủ.",
+    "eventName": "Tên Sự Kiện",
+    "eventNamePlaceholder": "VD: IRONMAN 70.3 Việt Nam",
+    "distance": "Cự Ly Đạp Xe",
+    "goalTime": "Mục Tiêu Đạp Xe (GG:PP)",
+    "terrain": "Địa Hình",
+    "terrainFlat": "Bằng Phẳng",
+    "terrainRolling": "Đồi Nhẹ",
+    "terrainHilly": "Đồi Núi",
+    "conditions": "Điều Kiện",
+    "bodyWeight": "Cân Nặng (kg)",
+    "currentCda": "CdA Hiện Tại (m²)",
+    "submit": "Tạo Báo Cáo",
+    "targetCda": "CdA Mục Tiêu",
+    "powerTarget": "Công Suất Cần Thiết",
+    "cdaGap": "Khoảng CdA Cần Giảm",
+    "gearChecklist": "Danh Sách Thiết Bị Ưu Tiên",
+    "fitTimeline": "Lịch Trình Fit",
+    "saveReport": "Lưu vào Hồ Sơ",
+    "shareReport": "Chia Sẻ",
+    "gear": {
+      "position": "Tối ưu tư thế (miễn phí)",
+      "helmet": "Mũ aero",
+      "skinsuit": "Đồ skin suit",
+      "wheels": "Vành deep-section",
+      "bars": "Tay lái aero"
+    },
+    "timeline": {
+      "12w": "12 tuần — Phiên fit cơ bản",
+      "8w": "8 tuần — Chốt tư thế aero",
+      "4w": "4 tuần — Chạy mô phỏng đua",
+      "2w": "2 tuần — Không dùng thiết bị mới",
+      "race": "Tuần đua — Không thay đổi tư thế"
+    }
+  },
+  "login": {
+    "title": "Đăng Nhập",
+    "badge": "TRUY CẬP VẬN ĐỘNG VIÊN",
+    "subtitle": "Truy cập hồ sơ, phiên lưu và kế hoạch đua của bạn.",
+    "google": "Tiếp tục với Google",
+    "emailLabel": "Email",
+    "emailPlaceholder": "email@cua.ban.com",
+    "password": "Mật khẩu",
+    "submit": "Đăng Nhập",
+    "noAccount": "Chưa có tài khoản?",
+    "signUp": "Tạo tài khoản",
+    "orDivider": "HOẶC",
+    "phone": "Tiếp tục với số điện thoại",
+    "error": "Đăng nhập thất bại. Kiểm tra lại thông tin."
+  },
+  "tools": {
+    "title": "Công Cụ Kỹ Thuật",
+    "aeroCalc": { "title": "Máy Tính Aero", "sub": "Tính watt tiết kiệm và thời gian thu được." },
+    "racePlanner": { "title": "Kế Hoạch Đua", "sub": "Tạo báo cáo chuẩn bị đua toàn diện." },
+    "powerZones": { "title": "Vùng Công Suất", "sub": "7 vùng Coggan từ FTP của bạn." },
+    "racePace": { "title": "Tốc Độ Đua", "sub": "Tốc độ, công suất ước tính và chiến thuật tốc độ." },
+    "wind": { "title": "Tác Động Gió", "sub": "CdA hiệu quả, chi phí công suất và delta thời gian." },
+    "nutrition": { "title": "Dinh Dưỡng", "sub": "Mục tiêu carb, natri và nước theo giờ cho ngày đua." }
+  },
+  "compare": {
+    "badge": "PHÂN TÍCH TƯ THẾ",
+    "title": "So Sánh Tư Thế",
+    "addConfig": "Thêm Cấu Hình",
+    "configLabel": "Cấu Hình",
+    "speed": "Tốc Độ (km/h)",
+    "distance": "Cự Ly (km)",
+    "results": "Kết Quả So Sánh",
+    "cdaLabel": "CdA",
+    "powerLabel": "Công Suất tại Tốc Độ",
+    "timeSavedLabel": "Thời Gian so với Cấu Hình 1",
+    "copyToPlanner": "Sao Chép Tốt Nhất vào Kế Hoạch Đua"
   }
 }
