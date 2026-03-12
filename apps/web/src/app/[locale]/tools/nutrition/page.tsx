@@ -49,7 +49,7 @@ export default function NutritionPage() {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "1rem" }}>
+      <div className="grid-2col" style={{ gap: "1rem" }}>
         {[
           { label: "Carbs / Hour", value: result.carbsPerHour + " g" },
           { label: "Sodium / Hour", value: result.sodiumPerHour + " mg" },

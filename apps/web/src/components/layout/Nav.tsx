@@ -12,12 +12,16 @@ export function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
 
   // pathname includes the locale prefix, e.g. /en or /vi
   const localePrefix = `/${locale}`;
@@ -124,10 +128,30 @@ export function Nav() {
           </div>
         </Link>
 
+        {/* Hamburger — mobile only */}
+        <button
+          className="nav-hamburger"
+          aria-label="Toggle menu"
+          onClick={() => setMobileOpen((o) => !o)}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "0.5rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+          }}
+        >
+          <span style={{ display: "block", width: "22px", height: "2px", background: mobileOpen ? "var(--aero-accent)" : "var(--aero-white)", transition: "background 0.2s", transform: mobileOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+          <span style={{ display: "block", width: "22px", height: "2px", background: "var(--aero-white)", opacity: mobileOpen ? 0 : 1, transition: "opacity 0.2s" }} />
+          <span style={{ display: "block", width: "22px", height: "2px", background: mobileOpen ? "var(--aero-accent)" : "var(--aero-white)", transition: "background 0.2s", transform: mobileOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+        </button>
+
         {/* Links + Language Switcher */}
         <ul
+          className="nav-links"
           style={{
-            display: "flex",
             alignItems: "center",
             gap: "2.5rem",
             listStyle: "none",
@@ -206,6 +230,21 @@ export function Nav() {
           </li>
         </ul>
       </nav>
+
+      {/* Mobile drawer */}
+      <div className={`nav-drawer${mobileOpen ? " open" : ""}`}>
+        <span className="nav-drawer-section">{t("tools")}</span>
+        {TOOL_LINKS.map(({ href, label }) => (
+          <Link key={href} href={href} className="nav-drawer-link accent">{label}</Link>
+        ))}
+        <span className="nav-drawer-section">Menu</span>
+        {NAV_LINKS.map(({ href, label }) => (
+          <Link key={href} href={href} className="nav-drawer-link">{label}</Link>
+        ))}
+        <div style={{ marginTop: "1.5rem" }}>
+          <LanguageSwitcher />
+        </div>
+      </div>
     </header>
   );
 }

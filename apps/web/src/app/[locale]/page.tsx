@@ -63,11 +63,11 @@ async function Hero() {
       </div>
 
       <div
+        className="hero-metric"
         style={{
           position: "absolute",
           top: "92px",
           right: "2.5rem",
-          display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
           gap: "6px",
@@ -297,9 +297,8 @@ async function Manifesto() {
         />
 
         <div
+          className="grid-3col"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "0",
             borderTop: "1px solid var(--aero-border)",
           }}
@@ -381,9 +380,8 @@ async function Numbers() {
         </span>
 
         <div
+          className="grid-3col"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "0",
             borderTop: "1px solid var(--aero-border)",
           }}
@@ -518,7 +516,7 @@ async function Process() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0" }}>
+        <div className="grid-3col" style={{ gap: "0" }}>
           {steps.map((step, i) => (
             <Link
               key={step.key}

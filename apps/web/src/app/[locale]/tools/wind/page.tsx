@@ -41,7 +41,7 @@ export default function WindPage() {
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+      <div className="grid-3col" style={{ gap: "1rem" }}>
         {[
           { label: "Effective CdA", value: result.effectiveCda.toFixed(3) + " m²" },
           { label: "Headwind Cost", value: "+" + Math.round(result.headwindPowerCostW) + " W" },

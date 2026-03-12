@@ -24,7 +24,7 @@ export default async function ToolsHubPage() {
         {t("title")}
       </h1>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+      <div className="grid-3col" style={{ gap: "1rem" }}>
         {TOOLS.map(({ href, key, icon }) => (
           <Link key={key} href={href} style={{ textDecoration: "none", display: "block",
             padding: "2rem", border: "1px solid var(--aero-border)",

@@ -41,7 +41,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Performance cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginBottom: "3rem" }}>
+      <div className="grid-3col" style={{ gap: "1.5rem", marginBottom: "3rem" }}>
         <PerformanceCard label={t("fitCard")} value={fitScore}
           sub={lastFit ? new Date(lastFit.created_at).toLocaleDateString() : undefined} accent />
         <PerformanceCard label={t("cdaCard")} value={cda}

@@ -64,7 +64,7 @@ export default function RacePacePage() {
       </form>
 
       {result && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+        <div className="grid-3col" style={{ gap: "1rem" }}>
           {[
             { label: "Required Speed", value: result.requiredSpeedKph.toFixed(1) + " km/h" },
             { label: "Est. Power", value: Math.round(result.estimatedPowerW) + " W" },
