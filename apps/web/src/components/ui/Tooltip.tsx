@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 
 interface TooltipProps {
   content: string;
@@ -10,11 +10,11 @@ interface TooltipProps {
 type TooltipPos = {
   top: number;
   left: number;
-  arrowLeft: number; // px from left edge of tooltip box, for the arrow
+  arrowLeft: number;
 };
 
-const TOOLTIP_WIDTH = 240;
-const MARGIN = 10; // min gap from viewport edge
+const TOOLTIP_WIDTH = 260;
+const MARGIN = 12;
 
 /**
  * Tooltip that uses position:fixed to escape parent overflow constraints.
@@ -31,12 +31,10 @@ export function Tooltip({ content, children }: TooltipProps) {
     const rect = triggerRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
 
-    // Ideal: align left edge of tooltip with left edge of trigger
     const idealLeft = rect.left;
-    // Clamp so tooltip stays within [MARGIN, vw - TOOLTIP_WIDTH - MARGIN]
     const left = Math.max(MARGIN, Math.min(idealLeft, vw - TOOLTIP_WIDTH - MARGIN));
-    // Arrow should point at the center of the trigger icon
-    const arrowLeft = Math.max(6, Math.min(rect.left + rect.width / 2 - left, TOOLTIP_WIDTH - 14));
+    // Arrow points at center of trigger icon
+    const arrowLeft = Math.max(8, Math.min(rect.left + rect.width / 2 - left, TOOLTIP_WIDTH - 16));
 
     setPos({ top: rect.top - MARGIN, left, arrowLeft });
   }, []);
@@ -49,13 +47,12 @@ export function Tooltip({ content, children }: TooltipProps) {
     setPos((prev) => {
       if (prev) return null;
       compute();
-      return null; // compute sets state asynchronously via setPos inside
+      return null;
     });
-    // Small delay to ensure compute runs after state is cleared
     setTimeout(() => compute(), 0);
   }, [compute]);
 
-  // Close on outside tap
+  // Close on outside interaction
   useEffect(() => {
     if (!pos) return;
     const close = (e: MouseEvent | TouchEvent) => {
@@ -89,23 +86,43 @@ export function Tooltip({ content, children }: TooltipProps) {
             position: "fixed",
             top: pos.top,
             left: pos.left,
-            transform: "translateY(-100%)",
             width: `${TOOLTIP_WIDTH}px`,
             maxWidth: `calc(100vw - ${MARGIN * 2}px)`,
             backgroundColor: "var(--aero-surface-2)",
-            border: "1px solid var(--aero-accent)",
-            padding: "0.875rem 1rem",
-            fontFamily: "var(--font-sans)",
-            fontSize: "0.76rem",
-            color: "var(--aero-off-white)",
-            lineHeight: 1.55,
+            // Left accent bar = brand signal; muted border on other 3 sides
+            borderTop: "1px solid var(--aero-border)",
+            borderRight: "1px solid var(--aero-border)",
+            borderBottom: "1px solid var(--aero-border)",
+            borderLeft: "2px solid var(--aero-accent)",
+            padding: "0.7rem 1rem",
             zIndex: 9999,
             pointerEvents: "none",
-            boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,69,0,0.06)",
+            // Animation handles the transform (translateY -100% + fade + slide)
+            animation: "tooltipIn 0.14s ease-out forwards",
           }}
         >
-          {content}
-          {/* Arrow points down at the trigger, position adjusted to follow trigger even when box is clamped */}
+          {/* Engineering callout header */}
+          <div style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "0.46rem",
+            letterSpacing: "0.26em",
+            color: "var(--aero-accent)",
+            textTransform: "uppercase",
+            marginBottom: "0.45rem",
+            opacity: 0.7,
+          }}>
+            // INFO
+          </div>
+          <div style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.73rem",
+            color: "var(--aero-off-white)",
+            lineHeight: 1.58,
+          }}>
+            {content}
+          </div>
+          {/* Arrow pointing down at trigger */}
           <span
             style={{
               position: "absolute",
@@ -113,9 +130,9 @@ export function Tooltip({ content, children }: TooltipProps) {
               left: `${pos.arrowLeft}px`,
               width: 0,
               height: 0,
-              borderLeft: "7px solid transparent",
-              borderRight: "7px solid transparent",
-              borderTop: "7px solid var(--aero-accent)",
+              borderLeft: "5px solid transparent",
+              borderRight: "5px solid transparent",
+              borderTop: "5px solid var(--aero-accent)",
             }}
           />
         </span>
@@ -128,24 +145,7 @@ export function Tooltip({ content, children }: TooltipProps) {
 export function InfoIcon({ tooltip }: { tooltip: string }) {
   return (
     <Tooltip content={tooltip}>
-      <span
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "14px",
-          height: "14px",
-          borderRadius: "50%",
-          border: "1px solid var(--aero-grey-dim)",
-          fontSize: "0.6rem",
-          color: "var(--aero-grey)",
-          marginLeft: "5px",
-          userSelect: "none",
-          flexShrink: 0,
-        }}
-      >
-        i
-      </span>
+      <span className="tooltip-icon">i</span>
     </Tooltip>
   );
 }

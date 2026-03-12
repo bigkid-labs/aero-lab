@@ -114,6 +114,12 @@ body {
   50%       { opacity: 0; }
 }
 
+/* Tooltip entry — fade + slide up from trigger */
+@keyframes tooltipIn {
+  from { opacity: 0; transform: translateY(calc(-100% + 8px)); }
+  to   { opacity: 1; transform: translateY(-100%); }
+}
+
 /* High-risk CTA pulse ring — orange glow expanding outward */
 @keyframes pulseRing {
   0%   { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.55); }
@@ -224,6 +230,31 @@ body {
   padding: 2rem;
   border: 1px solid var(--aero-border);
   background-color: var(--aero-surface);
+}
+
+/* ─── InfoIcon — hover-aware tooltip trigger ─────────────────────────────────── */
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid var(--aero-grey-dim);
+  font-size: 0.58rem;
+  font-family: var(--font-mono);
+  color: var(--aero-grey);
+  margin-left: 5px;
+  user-select: none;
+  flex-shrink: 0;
+  cursor: help;
+  line-height: 1;
+  transition: border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+.tooltip-icon:hover {
+  border-color: var(--aero-accent);
+  color: var(--aero-accent);
+  box-shadow: 0 0 8px rgba(255, 69, 0, 0.25);
 }
 
 /* ─── Touch target minimum (WCAG 2.5.5) ─────────────────────────────────────── */
