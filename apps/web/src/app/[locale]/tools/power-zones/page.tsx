@@ -1,6 +1,20 @@
 "use client";
 import { useState } from "react";
 import { computePowerZones } from "@/lib/physicsEngine";
+import { InfoIcon } from "@/components/ui/Tooltip";
+
+const TIPS = {
+  ftp: "Functional Threshold Power — max average power sustained for 60 min. The baseline for all 7 training zones.",
+  zones: {
+    1: "Active Recovery — very low intensity. Promotes blood flow without adaptation stress.",
+    2: "Endurance — aerobic base building. The foundation of TT and triathlon fitness.",
+    3: "Tempo — comfortably hard. Improves aerobic capacity and muscular endurance.",
+    4: "Lactate Threshold — race pace for 40–70 min efforts. Key zone for TT performance.",
+    5: "VO2 Max — 3–8 min maximal efforts. Raises aerobic ceiling.",
+    6: "Anaerobic Capacity — 30 sec–3 min all-out. Builds power above VO2 max.",
+    7: "Neuromuscular Power — sprint efforts under 15 sec. Max force and speed.",
+  } as Record<number, string>,
+};
 
 export default function PowerZonesPage() {
   const [ftp, setFtp] = useState(250);
@@ -15,8 +29,8 @@ export default function PowerZonesPage() {
 
       <div style={{ marginBottom: "2rem" }}>
         <label style={{ fontFamily: "var(--font-mono)", fontSize: "0.62rem", letterSpacing: "0.1em",
-          textTransform: "uppercase", color: "var(--aero-grey)", display: "block", marginBottom: "0.4rem" }}>
-          FTP (watts)
+          textTransform: "uppercase", color: "var(--aero-grey)", display: "flex", alignItems: "center", marginBottom: "0.4rem" }}>
+          FTP (watts)<InfoIcon tooltip={TIPS.ftp} />
         </label>
         <input type="number" min={100} max={500} value={ftp}
           onChange={(e) => setFtp(Number(e.target.value))}
@@ -33,7 +47,7 @@ export default function PowerZonesPage() {
             <span style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 900,
               color: "var(--aero-border)", minWidth: "2rem" }}>Z{z.zone}</span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.7rem", color: "var(--aero-white)",
-              flex: 1, textTransform: "uppercase", letterSpacing: "0.06em" }}>{z.name}</span>
+              flex: 1, textTransform: "uppercase", letterSpacing: "0.06em", display: "flex", alignItems: "center" }}>{z.name}<InfoIcon tooltip={TIPS.zones[z.zone]} /></span>
             <span style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 700,
               color: "var(--aero-accent)" }}>
               {z.range[0]}–{z.zone < 7 ? z.range[1] : "∞"} W
