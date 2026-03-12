@@ -209,20 +209,126 @@ body {
   padding: 1.25rem 0 0.5rem;
 }
 
+/* ─── AeroCalculator responsive layout ──────────────────────────────────────── */
+.aero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 3rem;
+  align-items: start;
+}
+.aero-positions { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.aero-sliders   {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 2rem;
+  border: 1px solid var(--aero-border);
+  background-color: var(--aero-surface);
+}
+
+/* ─── Touch target minimum (WCAG 2.5.5) ─────────────────────────────────────── */
+input, select, button, a[role="button"] {
+  min-height: 44px;
+}
+
+/* ─── Form row — flex children with minimum width so they don't go microscopic ─ */
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.form-row > * {
+  flex: 1;
+  min-width: 160px; /* prevents inputs from collapsing below readable width */
+}
+
+/* ─── Submit button — full-width on mobile ───────────────────────────────────── */
+.btn-submit { align-self: flex-start; }
+
+/* ─── Section page padding ───────────────────────────────────────────────────── */
+.page-section-h { padding-left: 2.5rem; padding-right: 2.5rem; }
+
+/* ─────────────────────────────────────────────────────────────────────────────── */
+/*  BREAKPOINT: ≤ 768px (phones + narrow tablets)                                 */
+/* ─────────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  /* Nav */
-  .nav-links    { display: none; }
+
+  /* ── Nav ─────────────────────────────────────────────────── */
+  .nav-links     { display: none; }
   .nav-hamburger { display: flex; }
-  .hide-mobile  { display: none; }
+  .hide-mobile   { display: none; }
 
-  /* Hero metric block — hide on mobile to avoid overlap with headline */
-  .hero-metric  { display: none; }
+  /* ── Hero ────────────────────────────────────────────────── */
 
-  /* Grids collapse to single column */
+  /* Hide floating metric block so it doesn't overlap heading */
+  .hero-metric { display: none; }
+
+  /* Reduce headline from clamp(5rem,14vw,13rem) → max 5rem on mobile */
+  .hero-h1 { font-size: clamp(2.6rem, 13vw, 5rem) !important; }
+
+  /* Tighten hero horizontal padding */
+  .hero-content { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+
+  /* Hero CTA row: stack tagline + buttons vertically */
+  .hero-cta-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+  }
+
+  /* CTA buttons: full width on mobile */
+  .hero-cta-row a {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* ── Home page sections: cut 10rem/8rem paddings to 4rem ─── */
+  .page-section-h {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  .manifesto-section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .numbers-section   { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .process-section   { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .finalcta-section  { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+
+  /* ── Manifesto pillars: add bottom border when stacked ────── */
+  .manifesto-pillar {
+    border-right: none !important;
+    border-bottom: 1px solid var(--aero-border) !important;
+    padding: 2rem 1.25rem !important;
+  }
+
+  /* ── Numbers: reset leftward padding offsets when single col ─ */
+  .numbers-cell { padding-left: 0 !important; }
+
+  /* ── Process steps: restore left border on all cells ─────── */
+  .process-step { border-left: 1px solid var(--aero-border) !important; }
+
+  /* ── Grids: collapse to 1 column ────────────────────────── */
   .grid-3col { grid-template-columns: 1fr; }
   .grid-2col { grid-template-columns: 1fr; }
 
-  /* Reduce section padding */
-  .section-pad   { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-  .section-pad-v { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+  /* ── AeroCalculator ─────────────────────────────────────── */
+  .aero-grid      { grid-template-columns: 1fr; gap: 2rem; }
+  .aero-positions { grid-template-columns: 1fr; }
+  .aero-sliders   { grid-template-columns: 1fr; }
+
+  /* CdaBar label column: shrink from 120px → 56px */
+  .cda-label {
+    min-width: 56px !important;
+    font-size: 0.48rem !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  /* ── Forms ──────────────────────────────────────────────── */
+  /* Force form-row children full-width below 480px */
+  .form-row > * { min-width: 100%; }
+
+  /* Submit buttons: full width on mobile */
+  .btn-submit { align-self: stretch !important; width: 100% !important; }
+
+  /* Race planner terrain buttons: taller touch target */
+  .terrain-btn { padding: 0.75rem 0.5rem !important; }
 }

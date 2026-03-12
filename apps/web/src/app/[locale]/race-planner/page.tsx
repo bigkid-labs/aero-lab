@@ -57,7 +57,7 @@ export default function RacePlannerPage() {
       <form onSubmit={handleGenerate} style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <fieldset style={fieldsetStyle}>
           <legend style={legendStyle}>Event</legend>
-          <div style={rowStyle}>
+          <div className="form-row" style={rowStyle}>
             <div style={{ flex: 2 }}>
               <label style={labelStyle}>{t("eventName")}</label>
               <input value={eventName} onChange={(e) => setEventName(e.target.value)}
@@ -72,7 +72,7 @@ export default function RacePlannerPage() {
               </select>
             </div>
           </div>
-          <div style={rowStyle}>
+          <div className="form-row" style={rowStyle}>
             <div style={{ flex: 1 }}>
               <label style={labelStyle}>{t("goalTime")}</label>
               <div style={{ display: "flex", gap: "0.5rem" }}>
@@ -87,7 +87,7 @@ export default function RacePlannerPage() {
               <label style={labelStyle}>{t("terrain")}</label>
               <div style={{ display: "flex", gap: "0" }}>
                 {(["flat","rolling","hilly"] as Terrain[]).map((t_) => (
-                  <button key={t_} type="button" onClick={() => setTerrain(t_)} style={{
+                  <button key={t_} type="button" onClick={() => setTerrain(t_)} className="terrain-btn" style={{
                     flex: 1, padding: "0.6rem", border: "1px solid var(--aero-border)",
                     backgroundColor: terrain === t_ ? "var(--aero-accent)" : "var(--aero-surface)",
                     color: terrain === t_ ? "#fff" : "var(--aero-grey)",
@@ -101,7 +101,7 @@ export default function RacePlannerPage() {
 
         <fieldset style={fieldsetStyle}>
           <legend style={legendStyle}>Rider</legend>
-          <div style={rowStyle}>
+          <div className="form-row" style={rowStyle}>
             <div style={{ flex: 1 }}>
               <label style={labelStyle}>{t("bodyWeight")}</label>
               <input type="number" min={40} max={130} value={weight}
@@ -115,13 +115,13 @@ export default function RacePlannerPage() {
           </div>
         </fieldset>
 
-        <button type="submit" style={submitStyle}>{t("submit")}</button>
+        <button type="submit" className="btn-submit" style={submitStyle}>{t("submit")}</button>
       </form>
 
       {result && (
         <div style={{ marginTop: "3rem", display: "flex", flexDirection: "column", gap: "2rem" }}>
           {/* Key metrics */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1rem" }}>
+          <div className="grid-3col" style={{ gap: "1rem" }}>
             {[
               { label: t("targetCda"), value: result.targetCda.toFixed(3) + " m²" },
               { label: t("powerTarget"), value: Math.round(result.requiredPowerW) + " W" },

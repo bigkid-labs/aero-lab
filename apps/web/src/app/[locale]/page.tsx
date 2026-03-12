@@ -93,6 +93,7 @@ async function Hero() {
       </div>
 
       <div
+        className="hero-content"
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
@@ -106,6 +107,7 @@ async function Hero() {
       >
         <div>
           <h1
+            className="hero-h1"
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "clamp(5rem, 14vw, 13rem)",
@@ -126,6 +128,7 @@ async function Hero() {
         </div>
 
         <div
+          className="hero-cta-row"
           style={{
             display: "flex",
             alignItems: "flex-end",
@@ -228,6 +231,7 @@ async function Manifesto() {
 
   return (
     <section
+      className="manifesto-section"
       style={{
         padding: "10rem 2.5rem",
         backgroundColor: "var(--aero-surface)",
@@ -306,6 +310,7 @@ async function Manifesto() {
           {(["precision", "performance", "yours"] as const).map((key, i) => (
             <div
               key={key}
+              className="manifesto-pillar"
               style={{
                 padding: "3rem 2.5rem",
                 borderRight: i < 2 ? "1px solid var(--aero-border)" : "none",
@@ -368,6 +373,7 @@ async function Numbers() {
 
   return (
     <section
+      className="numbers-section"
       style={{
         padding: "8rem 2.5rem",
         background: "var(--aero-black)",
@@ -389,6 +395,7 @@ async function Numbers() {
           {metrics.map((m, i) => (
             <div
               key={m.key}
+              className="numbers-cell"
               style={{
                 padding: "4rem 3rem 4rem 0",
                 borderRight: i < 2 ? "1px solid var(--aero-border)" : "none",
@@ -466,6 +473,7 @@ async function Process() {
 
   return (
     <section
+      className="process-section"
       style={{
         padding: "8rem 2.5rem",
         backgroundColor: "var(--aero-surface-2)",
@@ -521,6 +529,7 @@ async function Process() {
             <Link
               key={step.key}
               href={step.href}
+              className="process-step"
               style={{
                 textDecoration: "none",
                 display: "block",
@@ -620,6 +629,7 @@ async function FinalCTA() {
 
   return (
     <section
+      className="finalcta-section"
       style={{
         padding: "10rem 2.5rem",
         background: `

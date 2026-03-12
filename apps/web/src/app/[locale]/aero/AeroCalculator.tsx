@@ -65,13 +65,13 @@ export function AeroCalculator() {
   const isImprovement = result.wattsSaved > 0;
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 380px", gap: "3rem", alignItems: "start" }}>
+    <div className="aero-grid">
 
       {/* ── LEFT: Controls ── */}
       <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
 
         {/* Position selectors */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+        <div className="aero-positions">
           <PositionSelector
             title={t("currentPosition")}
             value={currentId}
@@ -89,7 +89,7 @@ export function AeroCalculator() {
         </div>
 
         {/* Sliders */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", padding: "2rem", border: "1px solid var(--aero-border)", backgroundColor: "var(--aero-surface)" }}>
+        <div className="aero-sliders">
           <SliderField label={t("speed")} unit="km/h" value={speedKph} min={25} max={55} onChange={setSpeedKph} />
           <SliderField label={t("distance")} unit="km" value={distanceKm} min={10} max={180} step={10} onChange={setDistanceKm} />
         </div>
@@ -307,7 +307,7 @@ function CdaBar({ currentId, targetId, t }: { currentId: string; targetId: strin
               <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.62rem", color: isCurrent || isTarget ? "var(--aero-white)" : "var(--aero-grey-dim)", minWidth: "50px", textAlign: "right" }}>
                 {POSITION_CDA[id].toFixed(2)}
               </span>
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: isCurrent ? "var(--aero-grey)" : isTarget ? "var(--aero-accent)" : "var(--aero-grey-dim)", minWidth: "120px", letterSpacing: "0.08em" }}>
+              <span className="cda-label" style={{ fontFamily: "var(--font-mono)", fontSize: "0.55rem", color: isCurrent ? "var(--aero-grey)" : isTarget ? "var(--aero-accent)" : "var(--aero-grey-dim)", minWidth: "120px", letterSpacing: "0.08em" }}>
                 {isCurrent ? "◀ CURRENT" : isTarget ? "▶ TARGET" : ""}
               </span>
             </div>

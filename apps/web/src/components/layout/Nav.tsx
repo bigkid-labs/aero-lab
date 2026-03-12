@@ -45,6 +45,7 @@ export function Nav() {
   ];
 
   return (
+    <>
     <header
       style={{
         position: "fixed",
@@ -230,7 +231,9 @@ export function Nav() {
         </ul>
       </nav>
 
-      {/* Mobile drawer */}
+    </header>
+
+      {/* Mobile drawer — sibling of header so backdrop-filter doesn't trap fixed positioning */}
       <div className={`nav-drawer${mobileOpen ? " open" : ""}`}>
         <span className="nav-drawer-section">{t("tools")}</span>
         {TOOL_LINKS.map(({ href, label }) => (
@@ -244,6 +247,6 @@ export function Nav() {
           <LanguageSwitcher />
         </div>
       </div>
-    </header>
+    </>
   );
 }

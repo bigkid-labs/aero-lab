@@ -1,19 +1,23 @@
 import { getTranslations } from "next-intl/server";
-import { createClient } from "@/lib/supabase/server";
+import { getAuthUser, createClient } from "@/lib/supabase/server";
 import { api } from "@/lib/api";
 import { PerformanceCard } from "@/components/dashboard/PerformanceCard";
 import { ActivityFeed } from "@/components/dashboard/ActivityFeed";
 import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
-  const t = await getTranslations("dashboard");
+  // getAuthUser() is deduplicated via React cache — no extra Supabase round-trip
+  // if another server component already called it in this render tree.
+  const user = await getAuthUser();
+  if (!user) redirect("/login");
+
+  // Need a fresh session token for the API call — getAuthUser() gave us user identity,
+  // now we get the full session (still only one Supabase client per request via cookies).
   const supabase = await createClient();
   const { data: { session } } = await supabase.auth.getSession();
 
-  if (!session) redirect("/login");
-
-  // session is guaranteed non-null after the redirect guard above
-  const sessions = await api.sessions.list(session!.access_token).catch(() => []);
+  const t = await getTranslations("dashboard");
+  const sessions = await api.sessions.list(session?.access_token ?? "").catch(() => []);
 
   // Derive metrics from most recent sessions
   const lastFit  = sessions.find((s) => s.session_type === "fit");

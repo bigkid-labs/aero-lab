@@ -2,6 +2,9 @@ import { z } from "zod";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
+// Next.js extended fetch config type
+type NextFetchRequestConfig = { revalidate?: number | false; tags?: string[] };
+
 // ─── Generic fetcher ───────────────────────────────────────────────────────────
 
 class ApiError extends Error {
@@ -17,11 +20,13 @@ class ApiError extends Error {
 async function apiFetch<T>(
   path: string,
   schema: z.ZodType<T>,
-  init?: RequestInit,
+  init?: RequestInit & { next?: NextFetchRequestConfig },
 ): Promise<T> {
+  const { next, ...restInit } = (init ?? {}) as RequestInit & { next?: NextFetchRequestConfig };
   const res = await fetch(`${BASE_URL}${path}`, {
-    headers: { "Content-Type": "application/json", ...init?.headers },
-    ...init,
+    headers: { "Content-Type": "application/json", ...restInit.headers },
+    ...restInit,
+    ...(next ? { next } : {}),
   });
 
   if (!res.ok) {
@@ -146,15 +151,23 @@ export const api = {
     apiFetch("/health", HealthSchema),
 
   products: {
+    // Cache product list for 5 min; tag for targeted revalidation on inventory changes
     list: (category?: string) =>
       apiFetch(
         `/api/v1/products${category ? `?category=${encodeURIComponent(category)}` : ""}`,
         z.array(ProductSchema),
+        { next: { revalidate: 300, tags: ["products"] } },
       ),
+    // Category list changes rarely — cache 10 min
     categories: () =>
-      apiFetch("/api/v1/products/categories", z.array(z.string())),
+      apiFetch("/api/v1/products/categories", z.array(z.string()), {
+        next: { revalidate: 600, tags: ["products"] },
+      }),
+    // Product detail cached per slug; revalidate individually when product is updated
     get: (slug: string) =>
-      apiFetch(`/api/v1/products/${slug}`, ProductDetailSchema),
+      apiFetch(`/api/v1/products/${slug}`, ProductDetailSchema, {
+        next: { revalidate: 300, tags: ["products", `product-${slug}`] },
+      }),
   },
 
   fitting: {
@@ -174,20 +187,28 @@ export const api = {
   },
 
   sessions: {
+    // Mutations — never cache
     create: (token: string, body: { session_type: string; payload: Record<string, unknown> }) =>
       apiFetchAuth("/api/v1/sessions", z.object({ id: z.string() }), token, {
         method: "POST",
         body: JSON.stringify(body),
+        cache: "no-store",
       }),
+    // User-specific data — never cache across users
     list: (token: string, params?: { limit?: number; offset?: number }) => {
       const q = new URLSearchParams({
         limit: String(params?.limit ?? 10),
         offset: String(params?.offset ?? 0),
       });
-      return apiFetchAuth(`/api/v1/sessions?${q}`, z.array(RiderSessionSchema), token);
+      return apiFetchAuth(`/api/v1/sessions?${q}`, z.array(RiderSessionSchema), token, {
+        cache: "no-store",
+      });
     },
+    // Public shared race plan — cache briefly (user shares a link)
     get: (id: string) =>
-      apiFetch(`/api/v1/sessions/${id}`, RiderSessionSchema),
+      apiFetch(`/api/v1/sessions/${id}`, RiderSessionSchema, {
+        next: { revalidate: 60, tags: [`session-${id}`] },
+      }),
   },
 } as const;
 

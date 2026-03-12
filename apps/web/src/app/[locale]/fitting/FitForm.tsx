@@ -75,7 +75,7 @@ export function FitForm({ products }: FitFormProps) {
         {/* ── Rider info ── */}
         <fieldset style={fieldsetStyle}>
           <legend style={legendStyle}>{t("sections.riderInfo")}</legend>
-          <div style={rowStyle}>
+          <div className="form-row" style={rowStyle}>
             <Field label={t("fields.fullName")} name="full_name" type="text" required placeholder="Your name" />
             <Field label={t("fields.email")} name="email" type="email" placeholder={t("fields.emailPlaceholder")} />
           </div>
@@ -84,7 +84,7 @@ export function FitForm({ products }: FitFormProps) {
         {/* ── Body geometry ── */}
         <fieldset style={fieldsetStyle}>
           <legend style={legendStyle}>{t("sections.geometry")}</legend>
-          <div style={rowStyle}>
+          <div className="form-row" style={rowStyle}>
             <FieldWithTooltip
               label={t("fields.torso")} name="torso_mm" type="number" required
               placeholder={t("fields.torsoPlaceholder")} min={300} max={800}
@@ -147,7 +147,7 @@ export function FitForm({ products }: FitFormProps) {
           </div>
         </fieldset>
 
-        <button type="submit" disabled={loading} style={submitStyle(loading)}>
+        <button type="submit" disabled={loading} className="btn-submit" style={submitStyle(loading)}>
           {loading ? t("submitting") : t("submit")}
         </button>
       </form>

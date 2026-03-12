@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 interface TooltipProps {
   content: string;
@@ -10,32 +10,66 @@ interface TooltipProps {
 type TooltipPos = {
   top: number;
   left: number;
-  openLeft: boolean;
+  arrowLeft: number; // px from left edge of tooltip box, for the arrow
 };
 
+const TOOLTIP_WIDTH = 240;
+const MARGIN = 10; // min gap from viewport edge
+
 /**
- * Tooltip that uses position:fixed to escape any parent overflow constraints.
- * Direction (left/right) is auto-detected from available viewport space.
+ * Tooltip that uses position:fixed to escape parent overflow constraints.
+ * - Hover on desktop, tap to toggle on touch devices.
+ * - Position is clamped so the box never overflows either viewport edge.
+ * - Arrow always points at the trigger regardless of clamped position.
  */
 export function Tooltip({ content, children }: TooltipProps) {
   const [pos, setPos] = useState<TooltipPos | null>(null);
   const triggerRef = useRef<HTMLSpanElement>(null);
 
-  const show = useCallback(() => {
+  const compute = useCallback(() => {
     if (!triggerRef.current) return;
     const rect = triggerRef.current.getBoundingClientRect();
-    const TOOLTIP_WIDTH = 260;
-    const GAP = 10;
-    // Open leftward if not enough room to the right
-    const openLeft = window.innerWidth - rect.left < TOOLTIP_WIDTH + 16;
-    setPos({
-      top: rect.top - GAP,
-      left: openLeft ? rect.right - TOOLTIP_WIDTH : rect.left,
-      openLeft,
-    });
+    const vw = window.innerWidth;
+
+    // Ideal: align left edge of tooltip with left edge of trigger
+    const idealLeft = rect.left;
+    // Clamp so tooltip stays within [MARGIN, vw - TOOLTIP_WIDTH - MARGIN]
+    const left = Math.max(MARGIN, Math.min(idealLeft, vw - TOOLTIP_WIDTH - MARGIN));
+    // Arrow should point at the center of the trigger icon
+    const arrowLeft = Math.max(6, Math.min(rect.left + rect.width / 2 - left, TOOLTIP_WIDTH - 14));
+
+    setPos({ top: rect.top - MARGIN, left, arrowLeft });
   }, []);
 
+  const show = useCallback(() => compute(), [compute]);
   const hide = useCallback(() => setPos(null), []);
+
+  // Touch: toggle on tap
+  const handleClick = useCallback(() => {
+    setPos((prev) => {
+      if (prev) return null;
+      compute();
+      return null; // compute sets state asynchronously via setPos inside
+    });
+    // Small delay to ensure compute runs after state is cleared
+    setTimeout(() => compute(), 0);
+  }, [compute]);
+
+  // Close on outside tap
+  useEffect(() => {
+    if (!pos) return;
+    const close = (e: MouseEvent | TouchEvent) => {
+      if (triggerRef.current && !triggerRef.current.contains(e.target as Node)) {
+        setPos(null);
+      }
+    };
+    document.addEventListener("mousedown", close);
+    document.addEventListener("touchstart", close);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("touchstart", close);
+    };
+  }, [pos]);
 
   return (
     <span
@@ -45,6 +79,7 @@ export function Tooltip({ content, children }: TooltipProps) {
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
+      onClick={handleClick}
     >
       {children}
       {pos && (
@@ -55,7 +90,8 @@ export function Tooltip({ content, children }: TooltipProps) {
             top: pos.top,
             left: pos.left,
             transform: "translateY(-100%)",
-            width: "260px",
+            width: `${TOOLTIP_WIDTH}px`,
+            maxWidth: `calc(100vw - ${MARGIN * 2}px)`,
             backgroundColor: "var(--aero-surface-2)",
             border: "1px solid var(--aero-accent)",
             padding: "0.875rem 1rem",
@@ -69,14 +105,12 @@ export function Tooltip({ content, children }: TooltipProps) {
           }}
         >
           {content}
-          {/* Arrow points down toward the trigger icon */}
+          {/* Arrow points down at the trigger, position adjusted to follow trigger even when box is clamped */}
           <span
             style={{
               position: "absolute",
               top: "100%",
-              ...(pos.openLeft
-                ? { right: "7px", left: "auto" }
-                : { left: "7px", right: "auto" }),
+              left: `${pos.arrowLeft}px`,
               width: 0,
               height: 0,
               borderLeft: "7px solid transparent",
